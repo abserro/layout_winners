@@ -11,6 +11,7 @@ $screen-xl: 1200px;
 $screen-lg: 992px;
 $screen-md: 768px;
 $screen-sm: 576px;
+$screen-xs: 320px;
 
 $color-gray-dark: #9b9faa;
 $color-gray-light: #efefef;
@@ -156,7 +157,7 @@ $background-image-mobile: "https://catherineasquithgallery.com/uploads/posts/202
 
 ul.nav {
   padding: 0;
-  height: 100%;
+  width: 100%;
   @include alignment-center(flex, center);
 }
 
@@ -251,10 +252,15 @@ li.button {
   &#week4 {
     border-radius: 0 2em 2em 0;
   }
+
+  @media (max-width: $screen-xs) {
+    padding: 0.5rem 0.2rem;
+    @include responsive-font(1, $screen-xs);
+  }
 }
 
 .container-table {
-  min-width: 320px;
+  min-width: $screen-xs;
   max-width: 100%;
   box-sizing: border-box;
   padding: 0 $spacing * 1.5;
