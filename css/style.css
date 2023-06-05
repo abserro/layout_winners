@@ -1,5 +1,4 @@
-@charset "UTF-8";
-@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap");
 .winners-block {
   width: 100%;
   color: #9b9faa;
@@ -352,22 +351,23 @@ li.button#week4 {
 @media (min-width: 768px) {
   .container-table #table-winners th:first-child,
 .container-table #table-winners td:first-child {
-    width: 30%; /* ширина 1-го столбцов */
+    width: 30%;
   }
   .container-table #table-winners th:nth-child(2),
 .container-table #table-winners td:nth-child(2) {
-    width: 25%; /* ширина 2-го столбцов */
+    width: 25%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .container-table #table-winners th:nth-child(3),
 .container-table #table-winners td:nth-child(3) {
-    width: 10%; /* ширина 3-го столбца */
+    width: 45%;
+    text-align: right;
   }
-  .container-table #table-winners th:nth-child(4),
-.container-table #table-winners td:nth-child(4) {
-    width: 35%; /* ширина 4-го столбцов */
+  .container-table #table-winners th:nth-child(3) img,
+.container-table #table-winners td:nth-child(3) img {
+    float: left;
   }
 }
 @media (max-width: 768px) {
@@ -427,14 +427,11 @@ li.button#week4 {
   text-align: center;
   padding: 2rem 0;
 }
-#show-more-link.hidden {
-  display: none;
-}
 
 @-webkit-keyframes slideInFromRight {
   from {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
     opacity: 0;
   }
   to {
@@ -446,8 +443,8 @@ li.button#week4 {
 
 @keyframes slideInFromRight {
   from {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
     opacity: 0;
   }
   to {
