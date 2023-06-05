@@ -1,0 +1,359 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap");
+
+$icon-size: 60px; // Размер иконок
+$border-radius: 0.5; // Радиус скругления
+$spacing: 1rem; // Промежутки
+
+$base-font-size: 16px; // Базовый размер шрифта
+
+// Ширина экрана
+$screen-xl: 1200px;
+$screen-lg: 992px;
+$screen-md: 768px;
+$screen-sm: 576px;
+
+$color-gray-dark: #9b9faa;
+$color-gray-light: #efefef;
+
+$background-color-desktop: #f6f6f6;
+$background-color-tablet: #c5f7f7;
+$background-color-mobile: #fde5e5;
+
+//Фоновые изображения
+$background-image-tablet: "https://klike.net/uploads/posts/2022-12/1670646246_3-60.jpg";
+$background-image-mobile: "https://catherineasquithgallery.com/uploads/posts/2021-02/1613403059_130-p-bezhevii-kosmos-fon-193.jpg";
+
+// миксин для респонсивного шрифта
+@mixin responsive-font($multiplier, $breakpoint) {
+  @media (min-width: $breakpoint) {
+    font-size: calc(#{$base-font-size} * #{$multiplier});
+  }
+
+  @media (max-width: $screen-sm) {
+    font-size: calc(#{$base-font-size} * #{$multiplier * 0.7});
+  }
+}
+
+// миксин для установки фона
+@mixin background-image($image-url) {
+  $gradient-colors: #0000, #0000 49%, #0005 50%, #0000 51%, #0000;
+  background: url($image-url) repeat,
+    linear-gradient(to right, $gradient-colors);
+}
+
+// миксин для выравнивания по центру
+@mixin alignment-center($display, $align) {
+  @if ($display != "") {
+    display: $display;
+  }
+  justify-content: $align;
+  align-items: $align;
+}
+
+.winners-block {
+  width: 100%;
+  color: $color-gray-dark;
+  font-family: "Montserrat", sans-serif;
+  font-size: $base-font-size;
+  font-weight: normal;
+  background-color: $background-color-desktop;
+
+  @include alignment-center("", center);
+  @include responsive-font(1.1, $screen-md);
+  @include responsive-font(1.2, $screen-lg);
+  @include responsive-font(1.3, $screen-xl);
+
+  //Установка заднего фона (градиент) на случай, если класс .background-container будет удален
+  @media (min-width: $screen-md) and (max-width: $screen-lg) {
+    background: linear-gradient(70deg, transparent, $background-color-tablet);
+  }
+
+  @media (max-width: $screen-md) {
+    background: linear-gradient(70deg, transparent, $background-color-mobile);
+  }
+}
+
+//Установка заднего фона
+.background-container {
+  background-color: $background-color-desktop;
+
+  @media (min-width: $screen-md) and (max-width: $screen-lg) {
+    @include background-image($background-image-tablet);
+  }
+
+  @media (max-width: $screen-md) {
+    @include background-image($background-image-mobile);
+  }
+}
+
+.row {
+  margin: 0;
+}
+
+.header {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 15px -12px $color-gray-dark;
+  padding: $spacing;
+  background-image: none;
+
+  .title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+
+    @include responsive-font(2, $screen-sm);
+    @include responsive-font(2.5, $screen-md);
+    @include responsive-font(2.7, $screen-lg);
+    @include responsive-font(3, $screen-xl);
+  }
+}
+
+.icon.icon-open {
+  position: relative;
+  width: $icon-size;
+  height: $icon-size;
+  border-radius: $icon-size * $border-radius;
+  padding-bottom: $icon-size * 0.1;
+  @include alignment-center(flex, center);
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s ease;
+    border-radius: $icon-size * $border-radius;
+  }
+
+  &::before {
+    background: $color-gray-light;
+    box-shadow: inset 0 0 0 $icon-size $background-color-desktop;
+  }
+
+  &:hover::before {
+    box-shadow: inset 0 0 0 1px $background-color-desktop;
+  }
+
+  i {
+    position: relative;
+    color: $color-gray-dark;
+    font-size: $icon-size * 0.8;
+    transition: all 0.2s ease;
+    @include alignment-center(flex, center);
+  }
+}
+
+// анимация вращения иконки
+.rotate i {
+  padding-bottom: $icon-size * 0.1;
+  transform: rotate(180deg);
+}
+
+ul.nav {
+  padding: 0;
+  height: 100%;
+  @include alignment-center(flex, center);
+}
+
+.container-nav {
+  align-items: center;
+  width: 100%;
+  padding: $spacing * 1.5;
+}
+
+form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  width: 100%;
+
+  @media (max-width: $screen-lg) {
+    justify-content: center;
+    padding-bottom: $spacing * 1.5;
+  }
+
+  #search-input {
+    color: $color-gray-dark;
+    font-size: 0.8em;
+    padding: 0.8em 2.5em 0.8em 1em;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: $color-gray-light;
+
+    &:focus {
+      border: 1px solid white;
+      outline: 2px solid $color-gray-dark;
+      outline-offset: 1px;
+    }
+
+    @media (max-width: $screen-sm) {
+      width: 100%;
+    }
+
+    // удаление крестика в input
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+    &::-ms-clear {
+      appearance: none;
+    }
+  }
+
+  #search-button {
+    border: none;
+    margin-left: -2.2em; // размещение кнопки поиска внутри input
+    margin-right: -0.6em;
+
+    i {
+      position: relative;
+      color: $color-gray-dark;
+      font-size: $icon-size * 0.35;
+      @include alignment-center(flex, center);
+    }
+  }
+}
+
+li.button {
+  color: $color-gray-dark;
+  font-size: 0.8em;
+  background-color: transparent;
+  border: 1px solid $color-gray-dark;
+  padding: 0.9rem 1rem;
+  user-select: none;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-right: 0; // избегание двойных границ между кнопками
+  }
+
+  &:hover {
+    background-color: $color-gray-light;
+  }
+
+  &.active {
+    color: $color-gray-light;
+    background-color: $color-gray-dark;
+    border: 1px solid $color-gray-dark;
+    outline: none;
+  }
+
+  // закругление 1-ой и последней кнопки
+  &#week1 {
+    border-radius: 2em 0 0 2em;
+  }
+
+  &#week4 {
+    border-radius: 0 2em 2em 0;
+  }
+}
+
+.container-table {
+  min-width: 320px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 $spacing * 1.5;
+  @include responsive-font(1, $screen-md);
+  @include responsive-font(1.1, $screen-lg);
+  @include responsive-font(1.2, $screen-xl);
+
+  @media (min-width: $screen-md) {
+    #table-winners {
+      th:first-child,
+      td:first-child {
+        width: 30%; // ширина 1-го столбцов
+      }
+
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 25%; // ширина 2-го столбцов
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 45%; // ширина 3-го столбца
+        text-align: right;
+
+        img {
+          float: left;
+        }
+      }
+    }
+  }
+
+  // адаптация таблицы под небольшой экран
+  @media (max-width: $screen-md) {
+    table {
+      thead {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        border-bottom: 2px solid $color-gray-dark;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right;
+
+        &::before {
+          content: attr(data-label);
+          font-weight: bold;
+          margin-right: $spacing * 3;
+        }
+      }
+    }
+  }
+}
+
+#table-winners {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  td,
+  th {
+    padding: $spacing;
+  }
+
+  thead {
+    border-bottom: 2px solid $color-gray-dark;
+  }
+}
+
+.show-more-container {
+  width: 100%;
+  @include alignment-center(flex, center);
+}
+
+#show-more-link {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+// анимация при переключении табов
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-from-right {
+  animation: slideInFromRight 0.5s;
+}
