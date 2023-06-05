@@ -8,21 +8,21 @@
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="winners-block background-conteiner">
+    <div class="winners-block background-container">
       <div class="header d-flex">
-        <div class="title">
+        <h2 class="title">
           Победители
-        </div>
-        <div aria-hidden="false" class="icon icon-expand align-items-center rounded collapsed" data-bs-target="#subcontainer" data-bs-toggle="collapse">
+        </h2>
+        <div aria-hidden="false" class="icon icon-open align-items-center rounded collapsed" data-bs-target="#subcontainer" data-bs-toggle="collapse">
           <i class="fa fa-chevron-up"></i>
         </div>
       </div>
       <div class="collapse" id="subcontainer">
-        <div class="conteiner-nav row">
+        <div class="container-nav row">
           <form class="col-lg-2 col-md-12 col-sm-12">
-            <input autocomplete="off" id="search-input" placeholder="Поиск по email" type="search"><button id="search-button" type="submit"><i class="fa fa-search"></i></button></input>
+            <input autocomplete="off" id="search-input" placeholder="Поиск по email" type="search" /><button id="search-button" type="submit"><i class="fa fa-search"></i></button>
           </form>
-          <ul class="nav col-lg-10 col-md-12 col-sm-12">
+          <ul class="nav col-lg-10 col-md-12 col-sm-12h">
             <li class="button" id="week1" onclick="handleWeekButtonClick(1)">
               1 неделя
             </li>
@@ -37,7 +37,7 @@
             </li>
           </ul>
         </div>
-        <div class="conteiner-table row">
+        <div class="container-table row">
           <table class="table-hover table-striped" id="table-winners">
             <thead class="thead-light">
               <tr>
@@ -51,14 +51,14 @@
                   Приз
                 </th>
                 <th>
-                  img
+                  Картинка
                 </th>
               </tr>
-              <tbody></tbody>
             </thead>
+            <tbody></tbody>
           </table>
         </div>
-        <div class="show-more-conteiner row">
+        <div class="show-more-container row">
           <a href="#" id="show-more-link">Показать еще</a>
         </div>
       </div>

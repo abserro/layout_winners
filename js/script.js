@@ -1,5 +1,6 @@
-const icons = document.querySelectorAll(".icon.icon-expand");
+const icons = document.querySelectorAll(".icon.icon-open");
 
+// добавление класса "rotate" к кнопке icon-open
 icons.forEach((icon) => {
   let isRotated = false;
   icon.addEventListener("click", () => {
@@ -12,11 +13,13 @@ icons.forEach((icon) => {
   });
 });
 
+// Получение данных из публичного API: name, email, text и тд
 function getData(page) {
   const url = `https://jsonplaceholder.typicode.com/comments?_limit=10&_page=${page}`;
   return fetch(url).then((response) => response.json());
 }
 
+// Получение данных из публичного API: name, email, text и тд
 function getPrizeImg(id) {
   const url = `https://jsonplaceholder.typicode.com/photos/${id}`;
   return fetch(url).then((response) => response.json());
@@ -37,7 +40,7 @@ function createTableRow(name, email, img, prize) {
   row.appendChild(emailCell);
 
   const prizeImage = document.createElement("img");
-  prizeImage.setAttribute("alt", "Фото пользователя");
+  prizeImage.setAttribute("alt", "Ваш приз");
   prizeImage.setAttribute("src", img); // Устанавливаем URL изображения
   prizeImage.style.height = "100px";
   prizeImage.style.width = "auto"; // Устанавливаем ширину изображения
@@ -51,9 +54,26 @@ function createTableRow(name, email, img, prize) {
   return row;
 }
 
+function hideShowMoreLink() {
+  const showMoreLink = document.querySelector("a#show-more-link");
+  if (showMoreLink) {
+    showMoreLink.classList.add("hidden");
+  }
+}
+
+function unhideShowMoreLink() {
+  const showMoreLink = document.querySelector("a#show-more-link");
+  if (showMoreLink) {
+    showMoreLink.classList.remove("hidden");
+  }
+}
+
 // Функция для заполнения таблицы данными
 function fillTableWithData(data) {
   const tableBody = document.querySelector("#table-winners tbody");
+
+  hideShowMoreLink();
+
   tableBody.innerHTML = ""; // Очистка содержимого таблицы
 
   data.forEach((item) => {
@@ -71,6 +91,7 @@ function fillTableWithData(data) {
         .then((imgData) => {
           const row = createTableRow(name, hiddenEmail, imgData.thumbnailUrl, body.slice(Math.trunc(body.length / 2)));
           tableBody.appendChild(row);
+          unhideShowMoreLink();
         })
         .catch((error) => console.log(error));
     }
